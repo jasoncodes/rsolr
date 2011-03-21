@@ -63,9 +63,9 @@ describe RSolr::Client do
     
     it 'should forward #request calls to the connection' do
       client.connection.should_receive(:request).
-        with('/music', :q=>'Coltrane', :wt=>:ruby).
-          # empty params so that Client doesn't try to evalulate to Ruby;
-          #   -- this happens if the :wt equal :ruby
+        with('/music', :q=>'Coltrane', :wt=>:json).
+          # empty params so that Client doesn't try to evalulate Ruby or JSON;
+          #   -- this happens if :wt equals :ruby or :json
           and_return(:params=>{})
       client.request '/music', :q=>'Coltrane'
     end
