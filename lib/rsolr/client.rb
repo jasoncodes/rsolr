@@ -1,3 +1,5 @@
+require 'json'
+
 class RSolr::Client
   
   attr_reader :connection
@@ -87,7 +89,7 @@ class RSolr::Client
   # type of request should be passed in here? -> map_params(:query, {})
   def map_params(params)
     params||={}
-    {:wt=>:ruby}.merge(params)
+    {:wt=>:json}.merge(params)
   end
 
   # "connection_response" must be a hash with the following keys:
@@ -102,8 +104,11 @@ class RSolr::Client
   def adapt_response(connection_response)
     data = connection_response[:body]
     # if the wt is :ruby, evaluate the ruby string response
-    if connection_response[:params][:wt] == :ruby
+    case connection_response[:params][:wt]
+    when :ruby
       data = Kernel.eval(data)
+    when :json
+      data = JSON.parse(data)
     end
     # attach a method called #raw that returns the original connection response value
     def data.raw; @raw end

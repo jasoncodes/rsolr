@@ -55,11 +55,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<builder>, [">= 2.1.2"])
+      s.add_runtime_dependency(%q<json>, ["~> 1.5"])
     else
       s.add_dependency(%q<builder>, [">= 2.1.2"])
+      s.add_dependency(%q<json>, ["~> 1.5"])
     end
   else
     s.add_dependency(%q<builder>, [">= 2.1.2"])
+    s.add_dependency(%q<json>, ["~> 1.5"])
   end
 end
 

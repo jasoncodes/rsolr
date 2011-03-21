@@ -13,6 +13,7 @@ begin
     gemspec.test_files = ['spec/**/*.rb', 'Rakefile', 'tasks/spec.rake', 'tasks/rdoc.rake']
     
     gemspec.add_dependency('builder', '>= 2.1.2')
+    gemspec.add_dependency('json', '~> 1.5')
     
     #require File.dirname(__FILE__) + '/../lib/rsolr'
     #gemspec.version = RSolr.version
